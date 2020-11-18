@@ -18,11 +18,11 @@ def calc(r):
 
 
 for index, row in read.iterrows():
-    read['euc_dist'] = (row['x [A]'] - read['x [A]']) ** 2 + (row['y [A]'] - read['y [A]'])** 2 + (row['z [A]'] - read['z [A]']) ** 2
+    read['R'] = (row['x [A]'] - read['x [A]']) ** 2 + (row['y [A]'] - read['y [A]'])** 2 + (row['z [A]'] - read['z [A]']) ** 2
     
-    read['euc_dist'] = np.sqrt(read['euc_dist'])
-    proximity = read.loc[(read['euc_dist'] > 0) & (read['euc_dist'] <= 10)].copy(deep=True)
-    proximity['calc'] = (4*e*((s/(proximity['euc_dist']**-10))**12)-((s/(proximity['euc_dist']**-10))**6))
+    read['R'] = np.sqrt(read['R'])
+    proximity = read.loc[(read['R'] > 0) & (read['R'] <= 10)].copy(deep=True)
+    proximity['calc'] = (4*e*((s/(proximity['R']**-10))**12)-((s/(proximity['R']**-10))**6))
     potentialE += sum(proximity['calc'])
 
 
